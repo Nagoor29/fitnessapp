@@ -45,10 +45,10 @@ export const setRefreshTokenCookie = (res, refreshToken) => {
 
   res.cookie('refreshToken', refreshToken, {
     httpOnly: true, // Prevents client-side JS XSS access
-    secure: isProduction, // HTTPS only in production
-    sameSite: isProduction ? 'strict' : 'lax', // CSRF protection
+    secure: isProduction, // HTTPS required for sameSite: 'none'
+    sameSite: isProduction ? 'none' : 'lax', // 'none' is mandatory for cross-site (Vercel <-> Render)
     maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days in milliseconds
-    path: '/api/auth', // Scoped only to auth refresh/logout endpoints
+    path: '/api/auth', // Scoped to auth refresh/logout endpoints
   });
 };
 
@@ -61,7 +61,7 @@ export const clearRefreshTokenCookie = (res) => {
   res.clearCookie('refreshToken', {
     httpOnly: true,
     secure: isProduction,
-    sameSite: isProduction ? 'strict' : 'lax',
+    sameSite: isProduction ? 'none' : 'lax',
     path: '/api/auth',
   });
 };

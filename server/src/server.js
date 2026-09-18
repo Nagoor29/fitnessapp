@@ -38,14 +38,27 @@ app.use(
 );
 
 // CORS configuration - supports credentials for cookies
+const allowedOrigins = [
+  process.env.CLIENT_URL,
+  'https://fitnessapp-client-beryl.vercel.app',
+  'http://localhost:5173',
+  'http://localhost:5000',
+].filter(Boolean);
+
 app.use(
   cors({
     origin: function (origin, callback) {
-      // Allow requests with no origin (mobile apps, curl, server-to-server, same-origin)
-      if (!origin || origin === CLIENT_URL || origin.includes('localhost') || origin.includes('onrender.com')) {
+      // Allow requests with no origin or matching client origins
+      if (
+        !origin ||
+        allowedOrigins.includes(origin) ||
+        origin.endsWith('.vercel.app') ||
+        origin.includes('localhost') ||
+        origin.includes('onrender.com')
+      ) {
         return callback(null, true);
       }
-      return callback(null, true); // Permissive in deployment with credentials
+      return callback(null, true);
     },
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
