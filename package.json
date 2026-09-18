@@ -1,0 +1,31 @@
+{
+  "name": "ai-powered-fitness-assistant",
+  "version": "1.0.0",
+  "description": "AI-Powered Personal Fitness Assistant - Monorepo",
+  "private": true,
+  "workspaces": [
+    "server",
+    "client"
+  ],
+  "scripts": {
+    "dev": "concurrently -n \"SERVER,CLIENT\" -c \"blue.bold,green.bold\" \"npm run dev --workspace=server\" \"npm run dev --workspace=client\"",
+    "dev:server": "npm run dev --workspace=server",
+    "dev:client": "npm run dev --workspace=client",
+    "install:all": "npm install && npm install --workspace=server && npm install --workspace=client",
+    "build": "npm run build --workspace=client"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.4"
+  },
+  "keywords": [
+    "fitness",
+    "ai",
+    "jwt",
+    "auth",
+    "react",
+    "express",
+    "mongodb"
+  ],
+  "author": "",
+  "license": "ISC"
+}
