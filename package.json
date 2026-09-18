@@ -8,14 +8,16 @@
     "client"
   ],
   "scripts": {
+    "start": "node server/src/server.js",
+    "build": "npm run build --workspace=client",
+    "seed": "npm run seed --workspace=server",
     "dev": "concurrently -n \"SERVER,CLIENT\" -c \"blue.bold,green.bold\" \"npm run dev --workspace=server\" \"npm run dev --workspace=client\"",
     "dev:server": "npm run dev --workspace=server",
     "dev:client": "npm run dev --workspace=client",
-    "install:all": "npm install && npm install --workspace=server && npm install --workspace=client",
-    "build": "npm run build --workspace=client"
+    "install:all": "npm install && npm install --workspace=server && npm install --workspace=client"
   },
   "devDependencies": {
-    "concurrently": "^9.2.4"
+    "concurrently": "^9.1.2"
   },
   "keywords": [
     "fitness",

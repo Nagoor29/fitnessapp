@@ -11,9 +11,14 @@ export const getMemoryToken = () => {
   return memoryAccessToken;
 };
 
+// Determine API Base URL (supports custom env var, relative path in production, or localhost fallback)
+const API_BASE_URL =
+  import.meta.env.VITE_API_URL ||
+  (import.meta.env.PROD ? '/api' : 'http://localhost:5000/api');
+
 // Create custom Axios instance
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:5000/api',
+  baseURL: API_BASE_URL,
   withCredentials: true, // Crucial for sending & receiving httpOnly refresh cookies
   headers: {
     'Content-Type': 'application/json',
@@ -78,7 +83,7 @@ api.interceptors.response.use(
       try {
         // Request new access token using httpOnly refresh token cookie
         const { data } = await axios.post(
-          `${import.meta.env.VITE_API_URL || 'http://localhost:5000/api'}/auth/refresh`,
+          `${API_BASE_URL}/auth/refresh`,
           {},
           { withCredentials: true }
         );
