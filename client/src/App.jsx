@@ -27,7 +27,7 @@ function App() {
 
   return (
     <div className="app-container">
-      <Navbar />
+      {!isFullBleedPage && <Navbar />}
       <main className={`main-content ${isFullBleedPage ? 'main-content-full' : ''}`}>
         {shouldOnboard ? (
           <Navigate to="/onboarding" replace />

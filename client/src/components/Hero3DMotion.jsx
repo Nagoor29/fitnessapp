@@ -11,7 +11,6 @@ import {
   Flame,
   ArrowRight,
   TrendingUp,
-  Rotate3d,
   Layers,
   Radio,
   Brain,
@@ -29,14 +28,10 @@ export const Hero3DMotion = () => {
   const containerRef = useRef(null);
   const canvasRef = useRef(null);
 
-  // 3D Tilt & Interaction State
-  const [rotateX, setRotateX] = useState(0);
-  const [rotateY, setRotateY] = useState(0);
-  const [isHovered, setIsHovered] = useState(false);
-  const [autoMotion, setAutoMotion] = useState(true);
+  // Interaction State (Stable, No Tilting)
   const [scanPulse, setScanPulse] = useState(false);
 
-  // Active Interactive Mode: 'hypertrophy' | 'metabolic' | 'biometric'
+  // Active Interactive Simulation Mode: 'hypertrophy' | 'metabolic' | 'biometric'
   const [activeMode, setActiveMode] = useState('hypertrophy');
 
   // Mode-based Dynamic Telemetry Data
@@ -156,32 +151,6 @@ export const Hero3DMotion = () => {
     };
   }, []);
 
-  // Smooth mouse move 3D parallax tracking
-  const handleMouseMove = (e) => {
-    if (!containerRef.current) return;
-    setAutoMotion(false);
-    setIsHovered(true);
-
-    const rect = containerRef.current.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
-
-    const deltaX = (x - centerX) / centerX;
-    const deltaY = (y - centerY) / centerY;
-
-    // Calculate rotation (-12 to +12 deg)
-    setRotateX(-deltaY * 10);
-    setRotateY(deltaX * 14);
-  };
-
-  const handleMouseLeave = () => {
-    setIsHovered(false);
-    setAutoMotion(true);
-  };
-
   // Trigger holographic muscle scan
   const triggerScan = () => {
     setScanPulse(true);
@@ -195,35 +164,28 @@ export const Hero3DMotion = () => {
         position: 'relative',
         width: '100%',
         minHeight: '100vh',
-        perspective: '1400px',
+        height: '100vh',
         margin: 0,
         overflow: 'hidden',
         background: '#03060c',
       }}
     >
-      {/* 3D Motion Main Container */}
+      {/* 3D Motion Stage Container (Completely Stable, Zero Tilt) */}
       <div
         ref={containerRef}
-        onMouseMove={handleMouseMove}
-        onMouseLeave={handleMouseLeave}
-        className={autoMotion ? 'motion-3d-auto-drift' : ''}
         style={{
           position: 'relative',
           width: '100%',
+          height: '100%',
           minHeight: '100vh',
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'space-between',
           overflow: 'hidden',
           background: 'radial-gradient(ellipse at center, #091220 0%, #020408 100%)',
-          transformStyle: 'preserve-3d',
-          transform: autoMotion
-            ? undefined
-            : `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`,
-          transition: isHovered ? 'transform 0.08s ease-out' : 'transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)',
         }}
       >
-        {/* Layer 1: Background 3D Render Image fitting entire screen with breathing depth */}
+        {/* Layer 1: Fullscreen 3D Background Image fitting entire screen */}
         <div
           style={{
             position: 'absolute',
@@ -233,9 +195,7 @@ export const Hero3DMotion = () => {
             backgroundPosition: 'center center',
             backgroundRepeat: 'no-repeat',
             opacity: 0.94,
-            transform: 'translateZ(-40px) scale(1.12)',
             filter: 'contrast(1.1) brightness(0.95)',
-            transition: 'transform 0.4s ease-out',
           }}
         />
 
@@ -245,7 +205,7 @@ export const Hero3DMotion = () => {
             position: 'absolute',
             inset: 0,
             background:
-              'radial-gradient(circle at 75% 35%, rgba(0, 245, 155, 0.2) 0%, transparent 60%), radial-gradient(circle at 20% 80%, rgba(6, 182, 212, 0.22) 0%, transparent 60%), linear-gradient(to top, rgba(2, 4, 8, 0.95) 0%, rgba(2, 4, 8, 0.2) 50%, rgba(2, 4, 8, 0.7) 100%)',
+              'radial-gradient(circle at 75% 35%, rgba(0, 245, 155, 0.2) 0%, transparent 60%), radial-gradient(circle at 20% 80%, rgba(6, 182, 212, 0.22) 0%, transparent 60%), linear-gradient(to top, rgba(2, 4, 8, 0.95) 0%, rgba(2, 4, 8, 0.25) 50%, rgba(2, 4, 8, 0.75) 100%)',
             pointerEvents: 'none',
           }}
         />
@@ -259,8 +219,6 @@ export const Hero3DMotion = () => {
             width: '460px',
             height: '460px',
             pointerEvents: 'none',
-            transformStyle: 'preserve-3d',
-            transform: 'translateZ(-20px)',
             opacity: 0.75,
           }}
         >
@@ -334,7 +292,7 @@ export const Hero3DMotion = () => {
           }}
         />
 
-        {/* Layer 4: Interactive HUD & Content (translateZ preserved) */}
+        {/* Layer 4: Interactive HUD & Content */}
         <div
           style={{
             position: 'relative',
@@ -346,8 +304,8 @@ export const Hero3DMotion = () => {
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'space-between',
+            height: '100%',
             minHeight: '100vh',
-            transformStyle: 'preserve-3d',
           }}
         >
           {/* ================= TOP HUD ACTION BAR ================= */}
@@ -356,16 +314,15 @@ export const Hero3DMotion = () => {
               display: 'flex',
               justifyContent: 'space-between',
               alignItems: 'center',
-              transform: 'translateZ(70px)',
               flexWrap: 'wrap',
               gap: '1.25rem',
               padding: '0.85rem 1.4rem',
-              background: 'rgba(8, 14, 26, 0.75)',
-              backdropFilter: 'blur(20px)',
-              WebkitBackdropFilter: 'blur(20px)',
+              background: 'rgba(8, 14, 26, 0.8)',
+              backdropFilter: 'blur(24px)',
+              WebkitBackdropFilter: 'blur(24px)',
               borderRadius: '1.25rem',
               border: '1px solid rgba(0, 245, 155, 0.25)',
-              boxShadow: '0 10px 30px rgba(0, 0, 0, 0.5)',
+              boxShadow: '0 10px 30px rgba(0, 0, 0, 0.6)',
             }}
           >
             {/* Brand Logo */}
@@ -392,7 +349,7 @@ export const Hero3DMotion = () => {
             </Link>
 
             {/* Middle Nav Links */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem', flexWrap: 'wrap' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', flexWrap: 'wrap' }}>
               <Link
                 to="/ai-coach"
                 style={{
@@ -545,7 +502,7 @@ export const Hero3DMotion = () => {
             </div>
           </div>
 
-          {/* ================= MAIN 3D HERO BODY ================= */}
+          {/* ================= MAIN HERO BODY ================= */}
           <div
             style={{
               display: 'grid',
@@ -556,8 +513,8 @@ export const Hero3DMotion = () => {
               padding: '2.5rem 0',
             }}
           >
-            {/* Left Column: Headline, Interactive Mode Selector & CTAs (translateZ 90px) */}
-            <div style={{ transform: 'translateZ(90px)', maxWidth: '620px' }}>
+            {/* Left Column: Headline, Interactive Mode Selector & CTAs */}
+            <div style={{ maxWidth: '620px' }}>
               {/* Telemetry Tag Badge */}
               <div
                 style={{
@@ -622,7 +579,7 @@ export const Hero3DMotion = () => {
                 and progressive overload periodization engineered by Claude AI.
               </p>
 
-              {/* Interactive Training Mode Pills (Extra Visual Moments) */}
+              {/* Interactive Training Mode Pills */}
               <div style={{ marginBottom: '2rem' }}>
                 <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '0.65rem', fontWeight: 700 }}>
                   Select Live Biometric Simulation Mode:
@@ -708,21 +665,19 @@ export const Hero3DMotion = () => {
               </div>
             </div>
 
-            {/* Right Column: Floating 3D Holographic HUD Cards (translateZ 120px to 170px) */}
+            {/* Right Column: HUD Cards & Biometric Telemetry */}
             <div
               style={{
                 display: 'flex',
                 flexDirection: 'column',
                 gap: '1.5rem',
                 alignItems: 'flex-end',
-                transformStyle: 'preserve-3d',
               }}
             >
-              {/* Floating Live Calorie & Muscle Group HUD Pill (translateZ 170px) */}
+              {/* Floating Live Calorie & Muscle Group HUD Pill */}
               <div
                 className="float-tag-anim"
                 style={{
-                  transform: 'translateZ(170px)',
                   display: 'flex',
                   alignItems: 'center',
                   gap: '0.75rem',
@@ -745,7 +700,7 @@ export const Hero3DMotion = () => {
                 </div>
               </div>
 
-              {/* Card 1: AI Coach Assistant Card (translateZ 150px) */}
+              {/* Card 1: AI Coach Assistant Card */}
               <div
                 className="floating-card-motion-1"
                 style={{
@@ -758,8 +713,6 @@ export const Hero3DMotion = () => {
                   borderRadius: '1.4rem',
                   padding: '1.5rem',
                   boxShadow: '0 25px 50px rgba(0, 0, 0, 0.85), 0 0 30px rgba(0, 245, 155, 0.2)',
-                  transform: 'translateZ(150px)',
-                  transition: 'transform 0.3s ease',
                 }}
               >
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.15rem' }}>
@@ -809,7 +762,7 @@ export const Hero3DMotion = () => {
                 </div>
               </div>
 
-              {/* Card 2: Real-Time Biometric Hologram HUD (translateZ 120px) */}
+              {/* Card 2: Real-Time Biometric Hologram HUD */}
               <div
                 className="floating-card-motion-2"
                 style={{
@@ -822,7 +775,6 @@ export const Hero3DMotion = () => {
                   borderRadius: '1.4rem',
                   padding: '1.4rem',
                   boxShadow: '0 25px 50px rgba(0, 0, 0, 0.85), 0 0 30px rgba(6, 182, 212, 0.2)',
-                  transform: 'translateZ(120px)',
                 }}
               >
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.85rem', borderBottom: '1px solid var(--border-color)', paddingBottom: '0.6rem' }}>
@@ -878,7 +830,6 @@ export const Hero3DMotion = () => {
               display: 'grid',
               gridTemplateColumns: 'repeat(auto-fit, minmax(170px, 1fr))',
               gap: '1rem',
-              transform: 'translateZ(70px)',
               marginTop: 'auto',
               paddingTop: '1.5rem',
               paddingBottom: '1rem',
