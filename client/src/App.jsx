@@ -9,6 +9,8 @@ import Workouts from './pages/Workouts';
 import AiCoach from './pages/AiCoach';
 import Exercises from './pages/Exercises';
 import Profile from './pages/Profile';
+import MotionShowcase from './pages/MotionShowcase';
+import Home from './pages/Home';
 import ProtectedRoute from './routes/ProtectedRoute';
 import { useAuth } from './context/AuthContext';
 import { useFitness } from './context/FitnessContext';
@@ -50,6 +52,9 @@ function App() {
                 )
               }
             />
+
+            {/* Public 3D Motion Preview Showcase */}
+            <Route path="/3d-preview" element={<MotionShowcase />} />
 
             {/* Protected Onboarding Route */}
             <Route
@@ -103,8 +108,18 @@ function App() {
               }
             />
 
-            {/* Root Redirect */}
-            <Route path="/" element={<Navigate to="/dashboard" replace />} />
+            {/* Root Landing Route */}
+            <Route
+              path="/"
+              element={
+                !loading && isAuthenticated ? (
+                  <Navigate to="/dashboard" replace />
+                ) : (
+                  <Home />
+                )
+              }
+            />
+            <Route path="/home" element={<Home />} />
 
             {/* Catch-all */}
             <Route path="*" element={<Navigate to="/" replace />} />

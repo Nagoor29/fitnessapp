@@ -10,6 +10,7 @@ import {
   User,
   LayoutDashboard,
   ShieldCheck,
+  Sparkles,
 } from 'lucide-react';
 
 export const Navbar = () => {
@@ -66,6 +67,10 @@ export const Navbar = () => {
               <Layers size={16} />
               <span>Exercises</span>
             </NavLink>
+            <NavLink to="/3d-preview" style={navLinkStyle}>
+              <Sparkles size={16} color="var(--accent-primary)" />
+              <span>3D Motion</span>
+            </NavLink>
             <NavLink to="/profile" style={navLinkStyle}>
               <User size={16} />
               <span>Profile</span>
@@ -75,6 +80,12 @@ export const Navbar = () => {
       </div>
 
       <div className="nav-actions">
+        {!isAuthenticated && (
+          <NavLink to="/3d-preview" className="btn btn-secondary btn-sm" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.35rem', borderColor: 'rgba(0, 245, 155, 0.3)' }}>
+            <Sparkles size={15} color="var(--accent-primary)" />
+            <span>3D Demo</span>
+          </NavLink>
+        )}
         {isAuthenticated && user ? (
           <>
             <Link to="/profile" className="user-tag" id="user-profile-badge" title={`Signed in as ${user.email}`} style={{ textDecoration: 'none' }}>

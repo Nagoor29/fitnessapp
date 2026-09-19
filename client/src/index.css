@@ -718,3 +718,104 @@ h1, h2, h3, h4, h5, h6 {
     font-size: 1.5rem;
   }
 }
+
+/* ==========================================================================
+   3D MOTION & HOLOGRAPHIC HUD ANIMATIONS
+   ========================================================================== */
+
+/* Auto Orbit subtle floating 3D drift when idle */
+.motion-3d-auto-drift {
+  animation: float3d 8s ease-in-out infinite;
+}
+
+@keyframes float3d {
+  0% {
+    transform: rotateX(0deg) rotateY(0deg);
+  }
+  25% {
+    transform: rotateX(4deg) rotateY(-5deg);
+  }
+  50% {
+    transform: rotateX(-3deg) rotateY(4deg);
+  }
+  75% {
+    transform: rotateX(3deg) rotateY(3deg);
+  }
+  100% {
+    transform: rotateX(0deg) rotateY(0deg);
+  }
+}
+
+/* Floating Glass Cards Elevation Oscillations */
+.floating-card-motion-1 {
+  animation: cardBob1 6s ease-in-out infinite;
+}
+
+.floating-card-motion-2 {
+  animation: cardBob2 7s ease-in-out infinite;
+}
+
+@keyframes cardBob1 {
+  0%, 100% {
+    transform: translateZ(150px) translateY(0px);
+  }
+  50% {
+    transform: translateZ(165px) translateY(-10px);
+  }
+}
+
+@keyframes cardBob2 {
+  0%, 100% {
+    transform: translateZ(120px) translateY(0px);
+  }
+  50% {
+    transform: translateZ(135px) translateY(8px);
+  }
+}
+
+/* Holographic Laser Scanline Waves */
+@keyframes laserScanSlow {
+  0% {
+    background-position: 0 -120px;
+  }
+  100% {
+    background-position: 0 700px;
+  }
+}
+
+@keyframes laserScanFast {
+  0% {
+    background-position: 0 -120px;
+  }
+  100% {
+    background-position: 0 700px;
+  }
+}
+
+/* Heart Rate Pulse Animation */
+.heart-pulse-anim {
+  animation: heartThump 1s ease-in-out infinite;
+}
+
+@keyframes heartThump {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.9;
+  }
+  50% {
+    transform: scale(1.25);
+    opacity: 1;
+    filter: drop-shadow(0 0 6px rgba(239, 68, 68, 0.8));
+  }
+}
+
+/* Live ECG / Telemetry Waveform SVG Stroke Dash */
+@keyframes dashWave {
+  from {
+    stroke-dashoffset: 400;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
