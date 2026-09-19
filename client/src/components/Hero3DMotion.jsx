@@ -13,6 +13,7 @@ import {
   Rotate3d,
   Layers,
   Radio,
+  Brain,
 } from 'lucide-react';
 
 export const Hero3DMotion = ({ onGetStarted }) => {
