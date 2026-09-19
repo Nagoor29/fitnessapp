@@ -45,18 +45,28 @@ export const Hero3DMotion = ({ onGetStarted }) => {
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
+    if (!ctx) return;
     let animationFrameId;
 
-    let width = (canvas.width = canvas.parentElement.offsetWidth);
-    let height = (canvas.height = canvas.parentElement.offsetHeight);
+    const getDimensions = () => {
+      const parent = canvas.parentElement;
+      return {
+        w: parent ? parent.offsetWidth || 1000 : 1000,
+        h: parent ? parent.offsetHeight || 680 : 680,
+      };
+    };
 
-    const particles = Array.from({ length: 35 }, () => ({
+    let { w: width, h: height } = getDimensions();
+    canvas.width = width;
+    canvas.height = height;
+
+    const particles = Array.from({ length: 30 }, () => ({
       x: Math.random() * width,
       y: Math.random() * height,
-      size: Math.random() * 3 + 1,
-      speedY: Math.random() * -0.6 - 0.2,
-      speedX: (Math.random() - 0.5) * 0.4,
-      opacity: Math.random() * 0.7 + 0.2,
+      size: Math.random() * 2.5 + 1,
+      speedY: Math.random() * -0.5 - 0.2,
+      speedX: (Math.random() - 0.5) * 0.3,
+      opacity: Math.random() * 0.6 + 0.2,
       hue: Math.random() > 0.5 ? 165 : 185, // Cyan & Emerald
     }));
 
@@ -74,7 +84,7 @@ export const Hero3DMotion = ({ onGetStarted }) => {
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
         ctx.fillStyle = `hsla(${p.hue}, 100%, 65%, ${p.opacity})`;
-        ctx.shadowBlur = 12;
+        ctx.shadowBlur = 10;
         ctx.shadowColor = `hsla(${p.hue}, 100%, 50%, 0.8)`;
         ctx.fill();
       });
@@ -85,9 +95,9 @@ export const Hero3DMotion = ({ onGetStarted }) => {
     render();
 
     const handleResize = () => {
-      if (!canvas.parentElement) return;
-      width = canvas.width = canvas.parentElement.offsetWidth;
-      height = canvas.height = canvas.parentElement.offsetHeight;
+      const dim = getDimensions();
+      width = canvas.width = dim.w;
+      height = canvas.height = dim.h;
     };
     window.addEventListener('resize', handleResize);
 
