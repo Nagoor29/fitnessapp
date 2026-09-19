@@ -114,11 +114,18 @@ h1, h2, h3, h4, h5, h6 {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   padding: 2rem 1.5rem;
   max-width: 1280px;
   margin: 0 auto;
   width: 100%;
+}
+
+.main-content-full {
+  padding: 0 !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  width: 100% !important;
 }
 
 /* Glassmorphic Cards */
@@ -817,5 +824,23 @@ h1, h2, h3, h4, h5, h6 {
   to {
     stroke-dashoffset: 0;
   }
+}
+
+/* Fullscreen 3D Motion Mode */
+.hero-3d-fullscreen-active {
+  position: fixed !important;
+  inset: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  z-index: 99999 !important;
+  margin: 0 !important;
+  border-radius: 0 !important;
+  border: none !important;
+}
+
+.hero-3d-fullscreen-active .hero-3d-inner {
+  border-radius: 0 !important;
+  min-height: 100vh !important;
+  height: 100vh !important;
 }
 

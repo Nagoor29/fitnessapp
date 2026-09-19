@@ -17,27 +17,27 @@ import {
 
 export const Home = () => {
   return (
-    <div style={{ width: '100%', maxWidth: '1280px', margin: '0 auto', padding: '0 1rem' }}>
-      {/* 3D Motion Hero Section */}
+    <div style={{ width: '100%' }}>
+      {/* Full-Screen Edge-to-Edge 3D Motion Hero Section */}
       <Hero3DMotion />
 
       {/* Feature Value Grid */}
-      <div style={{ marginTop: '3.5rem', marginBottom: '4rem' }}>
-        <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
-          <div className="hero-badge" style={{ marginBottom: '0.75rem' }}>
+      <div style={{ width: '100%', maxWidth: '1280px', margin: '0 auto', padding: '4rem 1.5rem' }}>
+        <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
+          <div className="hero-badge" style={{ marginBottom: '0.85rem' }}>
             <Sparkles size={14} />
             <span>Engineered for Peak Performance</span>
           </div>
-          <h2 style={{ fontSize: '2.2rem', marginBottom: '0.5rem' }}>
+          <h2 style={{ fontSize: '2.4rem', marginBottom: '0.65rem' }}>
             Next-Gen AI Fitness Telemetry
           </h2>
-          <p style={{ color: 'var(--text-secondary)', maxWidth: '620px', margin: '0 auto' }}>
+          <p style={{ color: 'var(--text-secondary)', maxWidth: '640px', margin: '0 auto', fontSize: '1.05rem' }}>
             FitPulse AI combines sports science, real-time volume periodization, and Anthropic Claude AI
             to deliver elite athletic coaching.
           </p>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.75rem' }}>
           <div className="glass-card preview-card">
             <div>
               <div className="preview-icon-badge" style={{ background: 'rgba(139, 92, 246, 0.15)', color: 'var(--accent-purple)' }}>
@@ -95,34 +95,35 @@ export const Home = () => {
             </div>
           </div>
         </div>
-      </div>
 
-      {/* Call to Action Banner */}
-      <div
-        className="glass-card"
-        style={{
-          padding: '3rem 2rem',
-          textAlign: 'center',
-          background: 'linear-gradient(135deg, rgba(0, 245, 155, 0.08) 0%, rgba(139, 92, 246, 0.08) 100%)',
-          border: '1px solid rgba(0, 245, 155, 0.3)',
-          boxShadow: 'var(--glow-shadow)',
-          marginBottom: '4rem',
-        }}
-      >
-        <h2 style={{ fontSize: '2.2rem', marginBottom: '0.75rem' }}>
-          Ready to Elevate Your Fitness?
-        </h2>
-        <p style={{ color: 'var(--text-secondary)', maxWidth: '520px', margin: '0 auto 1.75rem', fontSize: '1.05rem' }}>
-          Join FitPulse AI today. Start logging sessions, tracking overload volume, and generating custom AI routines.
-        </p>
-        <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', flexWrap: 'wrap' }}>
-          <Link to="/register" className="btn btn-primary" style={{ padding: '0.9rem 2.25rem', fontSize: '1.05rem' }}>
-            <span>Create Free Account</span>
-            <ArrowRight size={18} />
-          </Link>
-          <Link to="/login" className="btn btn-secondary" style={{ padding: '0.9rem 2rem', fontSize: '1.05rem' }}>
-            <span>Sign In</span>
-          </Link>
+        {/* Call to Action Banner */}
+        <div
+          className="glass-card"
+          style={{
+            padding: '3.5rem 2rem',
+            textAlign: 'center',
+            background: 'linear-gradient(135deg, rgba(0, 245, 155, 0.08) 0%, rgba(139, 92, 246, 0.08) 100%)',
+            border: '1px solid rgba(0, 245, 155, 0.3)',
+            boxShadow: 'var(--glow-shadow)',
+            marginTop: '4rem',
+            borderRadius: '1.5rem',
+          }}
+        >
+          <h2 style={{ fontSize: '2.4rem', marginBottom: '0.75rem' }}>
+            Ready to Elevate Your Fitness?
+          </h2>
+          <p style={{ color: 'var(--text-secondary)', maxWidth: '520px', margin: '0 auto 2rem', fontSize: '1.1rem' }}>
+            Join FitPulse AI today. Start logging sessions, tracking overload volume, and generating custom AI routines.
+          </p>
+          <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', flexWrap: 'wrap' }}>
+            <Link to="/register" className="btn btn-primary" style={{ padding: '0.95rem 2.5rem', fontSize: '1.1rem' }}>
+              <span>Create Free Account</span>
+              <ArrowRight size={18} />
+            </Link>
+            <Link to="/login" className="btn btn-secondary" style={{ padding: '0.95rem 2rem', fontSize: '1.1rem' }}>
+              <span>Sign In</span>
+            </Link>
+          </div>
         </div>
       </div>
     </div>

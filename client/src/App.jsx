@@ -23,10 +23,12 @@ function App() {
   // If user is authenticated, has no profile, and is not currently on /onboarding, redirect to /onboarding
   const shouldOnboard = isAuthenticated && hasProfile === false && location.pathname !== '/onboarding';
 
+  const isFullBleedPage = location.pathname === '/' || location.pathname === '/3d-preview';
+
   return (
     <div className="app-container">
       <Navbar />
-      <main className="main-content">
+      <main className={`main-content ${isFullBleedPage ? 'main-content-full' : ''}`}>
         {shouldOnboard ? (
           <Navigate to="/onboarding" replace />
         ) : (
