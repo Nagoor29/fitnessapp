@@ -826,21 +826,86 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
-/* Fullscreen 3D Motion Mode */
-.hero-3d-fullscreen-active {
-  position: fixed !important;
-  inset: 0 !important;
-  width: 100vw !important;
-  height: 100vh !important;
-  z-index: 99999 !important;
-  margin: 0 !important;
-  border-radius: 0 !important;
-  border: none !important;
+/* Holographic Cyber Reticle Rotation */
+@keyframes cyberRotate {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
 }
 
-.hero-3d-fullscreen-active .hero-3d-inner {
-  border-radius: 0 !important;
-  min-height: 100vh !important;
-  height: 100vh !important;
+@keyframes cyberRotateReverse {
+  from {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+}
+
+/* Radar Expanding Pulse */
+@keyframes radarPulse {
+  0% {
+    transform: translate(-50%, -50%) scale(0.6);
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 0.4;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1.4);
+    opacity: 0;
+  }
+}
+
+/* Equalizer Bars Bounce */
+@keyframes eqBounce1 {
+  0%, 100% { height: 6px; }
+  50% { height: 28px; }
+}
+
+@keyframes eqBounce2 {
+  0%, 100% { height: 22px; }
+  50% { height: 8px; }
+}
+
+@keyframes eqBounce3 {
+  0%, 100% { height: 12px; }
+  50% { height: 32px; }
+}
+
+@keyframes eqBounce4 {
+  0%, 100% { height: 26px; }
+  50% { height: 14px; }
+}
+
+/* Cyber Scanning Grid Line */
+@keyframes scanGridWave {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.8;
+  }
+  80% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(1000%);
+    opacity: 0;
+  }
+}
+
+/* Micro Floating Moment for Tags */
+@keyframes floatTag {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-6px); }
+}
+
+.float-tag-anim {
+  animation: floatTag 4s ease-in-out infinite;
 }
 
