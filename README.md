@@ -4,6 +4,16 @@ A full-stack, production-grade fitness web application featuring **User Authenti
 
 ---
 
+## 🎯 Top 5 Skills Demonstrated in this Project
+
+1. **Full-Stack MERN & RESTful API Architecture**: Engineered an end-to-end monorepo using React 18 (Vite), Node.js, Express.js, and MongoDB Atlas (Mongoose ODM) with modular routing, middleware pipelines, and MVC controllers.
+2. **AI Integration & Prompt Engineering (LLM / Claude SDK)**: Built an adaptive AI workout generation engine using the Anthropic Claude API SDK (`@anthropic-ai/sdk`) with structured JSON schema enforcement, multi-variable personalization (biometrics, 14-day training volume history), and dynamic heuristic fallback engines.
+3. **Advanced Authentication & Web Security**: Designed a dual-token JWT authentication system with short-lived memory access tokens, `httpOnly` secure refresh cookies, Axios 401 automatic silent token refresh interceptors, bcrypt password hashing, and Helmet + Rate-Limiting protections.
+4. **Interactive 2D/3D Visuals & Canvas Engineering**: Implemented custom high-performance HTML5 Canvas particle systems, real-time cybernetic reticle animations, and 60 FPS interactive physics with full-screen dynamic UI layouts.
+5. **Data Analytics & Reactive Visualization**: Constructed comprehensive fitness telemetry dashboards using Recharts (volume progression area charts, weekly frequency distributions) with React Context state management and dark-mode glassmorphic UI.
+
+---
+
 ## 🏗️ Architecture & Monorepo Structure
 
 ```
