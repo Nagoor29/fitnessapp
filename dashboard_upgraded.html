@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - TechHub Pro Search Console</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="ambient-glow"></div>
+
+  <nav class="navbar">
+    <a href="index.html" class="navbar-brand">
+      <span class="brand-badge">⚡ TechHub</span>
+      <span class="navbar-tag">Pro Console</span>
+    </a>
+    <div class="navbar-links">
+      <a href="dashboard.html" class="nav-link active">Search</a>
+      <a href="history.html" class="nav-link">History</a>
+      <a href="saved.html" class="nav-link">Saved</a>
+      <a href="profile.html" class="nav-link">Profile</a>
+      <button class="btn-icon" onclick="toggleTheme()" id="theme-icon" title="Toggle Theme">☀️</button>
+      <a href="#" onclick="logoutUser()" class="btn btn-outline" style="padding:6px 12px; font-size:12px; color:var(--danger); border-color:rgba(239,68,68,0.3);">Logout</a>
+    </div>
+  </nav>
+
+  <main class="container" style="padding-top: 48px;">
+    <div style="text-align:center; max-width:800px; margin:0 auto 36px;">
+      <h1 style="font-size:36px; font-weight:800; margin-bottom:12px;">What technical problem are you solving?</h1>
+      <p style="color:var(--text-secondary); font-size:16px;">
+        Type text or attach an error screenshot / PDF documentation. We query 17+ platforms in parallel.
+      </p>
+    </div>
+
+    <div class="search-container">
+      <div class="search-box">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="search-input" placeholder="Type a programming question, error message, or attach file..." autofocus>
+        <input type="file" id="file-upload-input" style="display:none;" accept="image/*,.pdf" onchange="handleFileInputChange(event)">
+        <button class="search-attach-btn" onclick="triggerFileUpload()" title="Attach Error Screenshot / PDF Log">📎 Attach File</button>
+        <button class="btn btn-primary" onclick="executeSearch()">Search</button>
+      </div>
+      <div id="file-preview-zone" style="display:none;"></div>
+    </div>
+
+    <div class="chips-container">
+      <span class="chip" onclick="quickSearch('How to reverse string in Python')">Python: String Reversal</span>
+      <span class="chip" onclick="quickSearch('How to handle errors in async await JavaScript')">JavaScript: Async/Await</span>
+      <span class="chip" onclick="quickSearch('How to read CSV in Python with pandas')">Python: CSV Parsing</span>
+      <span class="chip" onclick="quickSearch('How to use React useEffect cleanup function')">React: useEffect Cleanup</span>
+      <span class="chip" onclick="quickSearch('How to undo last git commit')">Git: Undo Commit</span>
+      <span class="chip" onclick="quickSearch('Docker compose port mapping explained')">Docker: Port Mapping</span>
+      <span class="chip" onclick="quickSearch('Transformers pipeline HuggingFace example')">HuggingFace: Pipeline</span>
+      <span class="chip" onclick="quickSearch('Attention mechanism transformer paper math')">ArXiv: Attention Math</span>
+    </div>
+
+    <div style="margin-top:50px; background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius-lg); padding:28px;">
+      <h3 style="font-size:16px; font-weight:700; margin-bottom:16px;">
+        <span>🎯 Active Multi-Platform Sources (17+ Platforms)</span>
+      </h3>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:12px;">
+        <div style="padding:10px 14px; background:var(--bg-input); border-radius:var(--radius-sm); font-size:13px;"><span style="color:var(--success);">●</span> Stack Overflow (API 2.3)</div>
+        <div style="padding:10px 14px; background:var(--bg-input); border-radius:var(--radius-sm); font-size:13px;"><span style="color:var(--success);">●</span> GitHub Code & Issues</div>
+        <div style="padding:10px 14px; background:var(--bg-input); border-radius:var(--radius-sm); font-size:13px;"><span style="color:var(--success);">●</span> MDN Web Docs</div>
+        <div style="padding:10px 14px; background:var(--bg-input); border-radius:var(--radius-sm); font-size:13px;"><span style="color:var(--success);">●</span> Reddit Dev Communities</div>
+        <div style="padding:10px 14px; background:var(--bg-input); border-radius:var(--radius-sm); font-size:13px;"><span style="color:var(--success);">●</span> Dev.to Technical Forem</div>
+        <div style="padding:10px 14px; background:var(--bg-input); border-radius:var(--radius-sm); font-size:13px;"><span style="color:var(--success);">●</span> Hacker News Algolia</div>
+        <div style="padding:10px 14px; background:var(--bg-input); border-radius:var(--radius-sm); font-size:13px;"><span style="color:var(--success);">●</span> ArXiv CS Research Papers</div>
+        <div style="padding:10px 14px; background:var(--bg-input); border-radius:var(--radius-sm); font-size:13px;"><span style="color:var(--success);">●</span> GitLab Open Source</div>
+        <div style="padding:10px 14px; background:var(--bg-input); border-radius:var(--radius-sm); font-size:13px;"><span style="color:var(--success);">●</span> Hugging Face AI Models</div>
+        <div style="padding:10px 14px; background:var(--bg-input); border-radius:var(--radius-sm); font-size:13px;"><span style="color:var(--success);">●</span> StackExchange (ServerFault/Ubuntu)</div>
+        <div style="padding:10px 14px; background:var(--bg-input); border-radius:var(--radius-sm); font-size:13px;"><span style="color:var(--success);">●</span> DevDocs Standards</div>
+        <div style="padding:10px 14px; background:var(--bg-input); border-radius:var(--radius-sm); font-size:13px;"><span style="color:var(--success);">●</span> Gemini AI Multimodal</div>
+      </div>
+    </div>
+  </main>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

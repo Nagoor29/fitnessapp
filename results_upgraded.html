@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Results - TechHub Pro Consensus Report</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <!-- html2pdf.js for client-side direct PDF downloads -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+<body>
+  <div class="ambient-glow"></div>
+
+  <nav class="navbar">
+    <a href="index.html" class="navbar-brand">
+      <span class="brand-badge">⚡ TechHub</span>
+      <span class="navbar-tag">Pro</span>
+    </a>
+    <div class="navbar-links">
+      <a href="dashboard.html" class="btn btn-outline" style="padding:6px 14px; font-size:13px;">🔍 New Search</a>
+      <a href="history.html" class="nav-link">History</a>
+      <a href="saved.html" class="nav-link">Saved</a>
+      <a href="profile.html" class="nav-link">Profile</a>
+      <button class="btn-icon" onclick="toggleTheme()" id="theme-icon" title="Toggle Theme">☀️</button>
+      <a href="#" onclick="logoutUser()" class="btn btn-outline" style="padding:6px 12px; font-size:12px; color:var(--danger); border-color:rgba(239,68,68,0.3);">Logout</a>
+    </div>
+  </nav>
+
+  <main class="container-wide" style="padding-top: 32px;">
+    <!-- Header & PDF Download Toolbar -->
+    <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:16px; margin-bottom:28px;">
+      <div>
+        <h1 id="query-display" style="font-size:28px; font-weight:800; margin-bottom:6px; letter-spacing:-0.02em;">Loading query...</h1>
+        <div id="topic-display" style="font-size:14px; color:var(--text-secondary);">Analyzing results...</div>
+      </div>
+      <div style="display:flex; gap:10px; flex-wrap:wrap;">
+        <button class="btn btn-primary" onclick="downloadConsensusPDF()" style="background:var(--accent-gradient); box-shadow:var(--shadow-glow);">
+          📄 Download PDF Report
+        </button>
+        <button class="btn btn-outline" onclick="exportResults('markdown')">📥 Markdown</button>
+        <button class="btn btn-outline" onclick="exportResults('json')">📦 JSON</button>
+        <button class="btn btn-outline" onclick="window.print()">🖨️ Print</button>
+      </div>
+    </div>
+
+    <!-- Ground Truth Synthesized Best Practice Card -->
+    <div id="ground-truth-container"></div>
+
+    <!-- Consensus & Source Analysis -->
+    <div class="consensus-grid">
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">🔍 Search & Platform Analysis</span>
+          <span class="card-source" id="sources-count-display">17 platforms</span>
+        </div>
+        <div id="search-analysis-content"></div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">📊 Multi-Source Consensus Detection</span>
+          <span class="card-source">Algorithm V2.5</span>
+        </div>
+        <div id="consensus-content"></div>
+      </div>
+    </div>
+
+    <!-- Source Filter Chips -->
+    <div style="margin: 28px 0 16px;">
+      <h3 style="font-size:16px; font-weight:700; margin-bottom:12px;">Filter Independent Platform Answers (17+ Sources):</h3>
+      <div class="chips-container" style="justify-content:flex-start;">
+        <span class="chip active" onclick="filterBySource('all')">✨ All Platforms</span>
+        <span class="chip" onclick="filterBySource('Stack Overflow')">Stack Overflow</span>
+        <span class="chip" onclick="filterBySource('GitHub')">GitHub</span>
+        <span class="chip" onclick="filterBySource('MDN')">MDN Web Docs</span>
+        <span class="chip" onclick="filterBySource('Reddit')">Reddit</span>
+        <span class="chip" onclick="filterBySource('Dev.to')">Dev.to</span>
+        <span class="chip" onclick="filterBySource('Hacker News')">Hacker News</span>
+        <span class="chip" onclick="filterBySource('ArXiv')">ArXiv CS</span>
+        <span class="chip" onclick="filterBySource('GitLab')">GitLab</span>
+        <span class="chip" onclick="filterBySource('Hugging Face')">Hugging Face</span>
+        <span class="chip" onclick="filterBySource('StackExchange')">StackExchange</span>
+        <span class="chip" onclick="filterBySource('DevDocs')">DevDocs</span>
+        <span class="chip" onclick="filterBySource('YouTube')">YouTube</span>
+        <span class="chip" onclick="filterBySource('Gemini')">Gemini AI</span>
+      </div>
+    </div>
+
+    <!-- Independent Answers Grid -->
+    <div id="results-container"></div>
+
+    <!-- Related Questions Section -->
+    <div id="related-container" style="margin-top: 48px;"></div>
+  </main>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

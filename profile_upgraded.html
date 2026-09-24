@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile & Settings - TechHub Pro</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="ambient-glow"></div>
+
+  <nav class="navbar">
+    <a href="index.html" class="navbar-brand">
+      <span class="brand-badge">⚡ TechHub</span>
+      <span class="navbar-tag">Profile</span>
+    </a>
+    <div class="navbar-links">
+      <a href="dashboard.html" class="nav-link">Search</a>
+      <a href="history.html" class="nav-link">History</a>
+      <a href="saved.html" class="nav-link">Saved</a>
+      <a href="profile.html" class="nav-link active">Profile</a>
+      <button class="btn-icon" onclick="toggleTheme()" id="theme-icon" title="Toggle Theme">☀️</button>
+      <a href="#" onclick="logoutUser()" class="btn btn-outline" style="padding:6px 12px; font-size:12px; color:var(--danger); border-color:rgba(239,68,68,0.3);">Logout</a>
+    </div>
+  </nav>
+
+  <main class="container" style="padding-top: 40px; max-width:880px;">
+    <div style="margin-bottom:28px;">
+      <h1 style="font-size:30px; font-weight:800; margin-bottom:6px;">Developer Settings & Consensus Tuning</h1>
+      <p style="color:var(--text-secondary); font-size:14px;">Customize your developer persona, tune source trust weights, and manage API keys.</p>
+    </div>
+
+    <!-- 1. Account Details & Avatar Selector -->
+    <div class="card" style="margin-bottom:24px;">
+      <div class="card-header">
+        <span class="card-title">👤 Developer Profile & Avatar</span>
+        <span class="card-source" id="profile-role-display">Developer</span>
+      </div>
+
+      <div style="display:flex; align-items:center; gap:20px; margin-bottom:20px; flex-wrap:wrap;">
+        <div style="width:72px; height:72px; border-radius:50%; background:var(--accent-glow); border:2px solid var(--accent); display:flex; align-items:center; justify-content:center; font-size:36px;" id="current-avatar-display">
+          👨‍💻
+        </div>
+        <div style="flex:1;">
+          <div style="margin-bottom:12px;">
+            <label style="font-size:13px; font-weight:600; color:var(--text-secondary);">Full Name</label>
+            <input type="text" id="profile-name-input" class="form-control" style="max-width:320px; margin-top:4px;" placeholder="Alex Chen">
+          </div>
+          <div style="font-size:13px; color:var(--text-muted);">
+            Email: <strong id="profile-email-display" style="color:var(--text-primary);">developer@example.com</strong>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top:16px;">
+        <label style="font-size:13px; font-weight:600; color:var(--text-secondary);">Choose Avatar Emoji:</label>
+        <div class="avatar-grid">
+          <div class="avatar-option" id="av-👨‍💻" onclick="selectAvatar('👨‍💻')">👨‍💻</div>
+          <div class="avatar-option" id="av-👩‍💻" onclick="selectAvatar('👩‍💻')">👩‍💻</div>
+          <div class="avatar-option" id="av-⚡" onclick="selectAvatar('⚡')">⚡</div>
+          <div class="avatar-option" id="av-🧠" onclick="selectAvatar('🧠')">🧠</div>
+          <div class="avatar-option" id="av-🚀" onclick="selectAvatar('🚀')">🚀</div>
+          <div class="avatar-option" id="av-🛡️" onclick="selectAvatar('🛡️')">🛡️</div>
+          <div class="avatar-option" id="av-🐍" onclick="selectAvatar('🐍')">🐍</div>
+          <div class="avatar-option" id="av-🦀" onclick="selectAvatar('🦀')">🦀</div>
+          <div class="avatar-option" id="av-🤖" onclick="selectAvatar('🤖')">🤖</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. Platform Trust Weighting Customizer -->
+    <div class="card" style="margin-bottom:24px;">
+      <div class="card-header">
+        <span class="card-title">⚖️ Consensus Source Weighting Engine</span>
+        <span class="card-source">Algorithm Tuning</span>
+      </div>
+      <p style="font-size:13px; color:var(--text-secondary); margin-bottom:20px;">
+        Tune the weight of each source platform (1 - 10). When you search, our consensus algorithm gives proportional weight to the platforms you trust most.
+      </p>
+
+      <div class="weight-slider-group">
+        <label>📌 Stack Overflow</label>
+        <input type="range" id="weight-stackoverflow" min="1" max="10" value="10" class="weight-slider" oninput="updateSliderVal('weight-stackoverflow', this.value)">
+        <span class="weight-val" id="weight-stackoverflow-val">10/10</span>
+      </div>
+
+      <div class="weight-slider-group">
+        <label>📖 MDN Web Docs</label>
+        <input type="range" id="weight-mdnwebdocs" min="1" max="10" value="10" class="weight-slider" oninput="updateSliderVal('weight-mdnwebdocs', this.value)">
+        <span class="weight-val" id="weight-mdnwebdocs-val">10/10</span>
+      </div>
+
+      <div class="weight-slider-group">
+        <label>🐙 GitHub Repos & Code</label>
+        <input type="range" id="weight-github" min="1" max="10" value="9" class="weight-slider" oninput="updateSliderVal('weight-github', this.value)">
+        <span class="weight-val" id="weight-github-val">9/10</span>
+      </div>
+
+      <div class="weight-slider-group">
+        <label>🧠 Gemini AI Ensemble</label>
+        <input type="range" id="weight-geminiaiensemble" min="1" max="10" value="9" class="weight-slider" oninput="updateSliderVal('weight-geminiaiensemble', this.value)">
+        <span class="weight-val" id="weight-geminiaiensemble-val">9/10</span>
+      </div>
+
+      <div class="weight-slider-group">
+        <label>📜 ArXiv CS Research</label>
+        <input type="range" id="weight-arxivcspapers" min="1" max="10" value="9" class="weight-slider" oninput="updateSliderVal('weight-arxivcspapers', this.value)">
+        <span class="weight-val" id="weight-arxivcspapers-val">9/10</span>
+      </div>
+
+      <div class="weight-slider-group">
+        <label>⚡ Hacker News</label>
+        <input type="range" id="weight-hackernews" min="1" max="10" value="8" class="weight-slider" oninput="updateSliderVal('weight-hackernews', this.value)">
+        <span class="weight-val" id="weight-hackernews-val">8/10</span>
+      </div>
+
+      <div class="weight-slider-group">
+        <label>💬 Reddit Communities</label>
+        <input type="range" id="weight-reddit" min="1" max="10" value="7" class="weight-slider" oninput="updateSliderVal('weight-reddit', this.value)">
+        <span class="weight-val" id="weight-reddit-val">7/10</span>
+      </div>
+
+      <div class="weight-slider-group">
+        <label>✍️ Dev.to Tutorials</label>
+        <input type="range" id="weight-devto" min="1" max="10" value="7" class="weight-slider" oninput="updateSliderVal('weight-devto', this.value)">
+        <span class="weight-val" id="weight-devto-val">7/10</span>
+      </div>
+
+      <div style="margin-top:20px; text-align:right;">
+        <button class="btn btn-primary" onclick="saveProfileSettings()">💾 Save Profile & Weights</button>
+      </div>
+    </div>
+
+    <!-- 3. Multi-Provider API Key Hub with Live Connection Test -->
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">🔑 Custom Multi-Platform API Keys</span>
+        <span class="card-source">Live Connection Test</span>
+      </div>
+      <p style="font-size:13px; color:var(--text-secondary); margin-bottom:20px;">
+        All standard platforms run for free out-of-the-box. If you want direct high-quota AI synthesis, add your API keys below and click <strong>Test Connection</strong>:
+      </p>
+
+      <!-- Gemini Key -->
+      <div class="form-group" style="margin-bottom:24px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+          <label for="gemini-key">Google Gemini API Key</label>
+          <span class="key-status-badge inactive" id="gemini-status">Default Shared Engine</span>
+        </div>
+        <div style="display:flex; gap:10px;">
+          <input type="password" id="gemini-key" class="form-control" placeholder="AIzaSy...">
+          <button class="btn btn-outline" style="font-size:12px;" onclick="testApiKey('gemini', 'gemini-key')">⚡ Test Key</button>
+        </div>
+      </div>
+
+      <!-- Groq Key -->
+      <div class="form-group" style="margin-bottom:24px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+          <label for="groq-key">Groq / Llama 3 Fast AI Key</label>
+          <span class="key-status-badge inactive" id="groq-status">Default Shared Engine</span>
+        </div>
+        <div style="display:flex; gap:10px;">
+          <input type="password" id="groq-key" class="form-control" placeholder="gsk_...">
+          <button class="btn btn-outline" style="font-size:12px;" onclick="testApiKey('groq', 'groq-key')">⚡ Test Key</button>
+        </div>
+      </div>
+
+      <!-- GitHub Token -->
+      <div class="form-group">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+          <label for="github-key">GitHub Personal Access Token (PAT)</label>
+          <span class="key-status-badge inactive" id="github-status">Public Search Active</span>
+        </div>
+        <div style="display:flex; gap:10px;">
+          <input type="password" id="github-key" class="form-control" placeholder="ghp_...">
+          <button class="btn btn-outline" style="font-size:12px;" onclick="testApiKey('github', 'github-key')">⚡ Test Key</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

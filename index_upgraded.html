@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TechHub Pro - Multi-Source Technical Q&A with Consensus Detection</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="ambient-glow"></div>
+
+  <nav class="navbar">
+    <a href="index.html" class="navbar-brand">
+      <span class="brand-badge">⚡ TechHub</span>
+      <span class="navbar-tag">Pro 2.5</span>
+    </a>
+    <div class="navbar-links">
+      <a href="dashboard.html" class="nav-link">Search Console</a>
+      <a href="history.html" class="nav-link">History</a>
+      <a href="saved.html" class="nav-link">Saved</a>
+      <a href="profile.html" class="nav-link">Profile</a>
+      <button class="btn-icon" onclick="toggleTheme()" id="theme-icon" title="Toggle Theme">☀️</button>
+      <a href="login.html" class="btn btn-outline" style="padding:6px 14px; font-size:13px;">Sign In</a>
+      <a href="register.html" class="btn btn-primary" style="padding:6px 16px; font-size:13px;">Get Started</a>
+    </div>
+  </nav>
+
+  <main class="container">
+    <section class="hero">
+      <div class="hero-pill">
+        <span>✨ 17+ API Platforms</span>
+        <span>•</span>
+        <span>Multimodal Photo/PDF & Consensus Engine</span>
+      </div>
+      <h1>Technical Answers from <span class="gradient-text">17+ Sources</span></h1>
+      <p>Compared. Synthesized. Mathematically Verified. Search text, code screenshots, or PDF documentation across Stack Overflow, GitHub, MDN, Reddit, ArXiv, GitLab, HuggingFace, and Gemini AI.</p>
+
+      <div class="search-container">
+        <div class="search-box">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="search-input" placeholder="Type a question or attach code screenshot / PDF log..." autofocus>
+          <input type="file" id="file-upload-input" style="display:none;" accept="image/*,.pdf" onchange="handleFileInputChange(event)">
+          <button class="search-attach-btn" onclick="triggerFileUpload()" title="Upload Code Screenshot / Photo / PDF Error Log">📎</button>
+          <button class="btn btn-primary" onclick="executeSearch()">Search</button>
+        </div>
+        <div id="file-preview-zone" style="display:none;"></div>
+      </div>
+
+      <div class="chips-container">
+        <span class="chip" onclick="quickSearch('How to reverse string in Python')">🐍 Python Reverse String</span>
+        <span class="chip" onclick="quickSearch('How to handle errors in async await JavaScript')">⚡ JS Async/Await</span>
+        <span class="chip" onclick="quickSearch('How to undo git commit without losing changes')">🐙 Git Undo Commit</span>
+        <span class="chip" onclick="quickSearch('How to center a div in CSS flexbox')">🎨 CSS Center Div</span>
+        <span class="chip" onclick="quickSearch('SQL left join vs inner join difference')">🗄️ SQL Joins</span>
+        <span class="chip" onclick="quickSearch('Docker container networking between services')">🐳 Docker Network</span>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-value">17+</div>
+          <div class="stat-label">Active Technical Sources</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">100%</div>
+          <div class="stat-label">Multimodal Photo & PDF OCR</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">&lt; 400ms</div>
+          <div class="stat-label">Parallel Retrieval Speed</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">PDF</div>
+          <div class="stat-label">1-Click Consensus Export</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Platform Badges -->
+    <section style="margin: 60px 0; text-align:center;">
+      <h3 style="font-size:18px; font-weight:700; color:var(--text-secondary); margin-bottom:24px; text-transform:uppercase; letter-spacing:0.05em;">
+        Parallel Multi-Source Consensus Architecture
+      </h3>
+      <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:12px; max-width:1040px; margin:0 auto;">
+        <span class="chip" style="font-size:13.5px; padding:7px 15px;">📌 Stack Overflow</span>
+        <span class="chip" style="font-size:13.5px; padding:7px 15px;">🐙 GitHub Code & Issues</span>
+        <span class="chip" style="font-size:13.5px; padding:7px 15px;">📖 MDN Web Docs</span>
+        <span class="chip" style="font-size:13.5px; padding:7px 15px;">💬 Reddit Communities</span>
+        <span class="chip" style="font-size:13.5px; padding:7px 15px;">✍️ Dev.to Engineering</span>
+        <span class="chip" style="font-size:13.5px; padding:7px 15px;">⚡ Hacker News</span>
+        <span class="chip" style="font-size:13.5px; padding:7px 15px;">📜 ArXiv CS Papers</span>
+        <span class="chip" style="font-size:13.5px; padding:7px 15px;">🦊 GitLab Open Source</span>
+        <span class="chip" style="font-size:13.5px; padding:7px 15px;">🤗 Hugging Face Hub</span>
+        <span class="chip" style="font-size:13.5px; padding:7px 15px;">⚙️ StackExchange Systems</span>
+        <span class="chip" style="font-size:13.5px; padding:7px 15px;">📚 Wikipedia CS Theory</span>
+        <span class="chip" style="font-size:13.5px; padding:7px 15px;">🎥 YouTube Tutorials</span>
+        <span class="chip" style="font-size:13.5px; padding:7px 15px;">🏛️ DevDocs Standards</span>
+        <span class="chip" style="font-size:13.5px; padding:7px 15px;">🧠 Gemini AI Ensemble</span>
+      </div>
+    </section>
+  </main>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
